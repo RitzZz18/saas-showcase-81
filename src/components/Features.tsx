@@ -10,10 +10,20 @@ import {
   Receipt,
   Brain,
   Smartphone,
-  HeartPulse
+  HeartPulse,
+  LucideIcon
 } from "lucide-react";
+import AnimatedCard from "./AnimatedCard";
+import { motion } from "framer-motion";
 
-const features = [
+interface Feature {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+  color: string;
+}
+
+const features: Feature[] = [
   {
     icon: Users,
     title: "CA Marketplace",
@@ -90,10 +100,30 @@ const features = [
 
 const Features = () => {
   return (
-    <section id="features" className="py-24 relative">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="features" className="py-24 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+          animate={{ x: [0, 50, 0], y: [0, 30, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl"
+          animate={{ x: [0, -50, 0], y: [0, -30, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <span className="text-primary font-medium text-sm uppercase tracking-wider">
             Features
           </span>
@@ -105,26 +135,29 @@ const Features = () => {
             A complete ecosystem for assessees and Chartered Accountants. 
             From filing to planning, we've got you covered.
           </p>
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <div
+            <AnimatedCard
               key={feature.title}
-              className="glass-card p-6 hover:border-primary/50 transition-all duration-300 group"
-              style={{ animationDelay: `${index * 50}ms` }}
+              delay={index * 0.05}
             >
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+              <motion.div 
+                className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-4`}
+                whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                transition={{ duration: 0.5 }}
+              >
                 <feature.icon className="w-6 h-6 text-primary-foreground" />
-              </div>
+              </motion.div>
               <h3 className="text-lg font-semibold text-foreground mb-2">
                 {feature.title}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {feature.description}
               </p>
-            </div>
+            </AnimatedCard>
           ))}
         </div>
       </div>

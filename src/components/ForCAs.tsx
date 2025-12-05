@@ -7,6 +7,7 @@ import {
   Wallet 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const benefits = [
   {
@@ -45,12 +46,32 @@ const ForCAs = () => {
   return (
     <section id="for-cas" className="py-24 relative overflow-hidden">
       {/* Background Accent */}
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2" />
+      <motion.div 
+        className="absolute top-1/2 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -translate-y-1/2"
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute bottom-0 left-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1.2, 1, 1.2],
+          opacity: [0.2, 0.4, 0.2],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
       
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
             <span className="text-accent font-medium text-sm uppercase tracking-wider">
               For Chartered Accountants
             </span>
@@ -64,11 +85,23 @@ const ForCAs = () => {
             </p>
 
             <div className="grid sm:grid-cols-2 gap-6 mb-10">
-              {benefits.map((benefit) => (
-                <div key={benefit.title} className="flex gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center flex-shrink-0">
+              {benefits.map((benefit, index) => (
+                <motion.div 
+                  key={benefit.title} 
+                  className="flex gap-4 group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  whileHover={{ x: 5 }}
+                >
+                  <motion.div 
+                    className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center flex-shrink-0"
+                    whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                  >
                     <benefit.icon className="w-5 h-5 text-accent" />
-                  </div>
+                  </motion.div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">
                       {benefit.title}
@@ -77,65 +110,145 @@ const ForCAs = () => {
                       {benefit.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
 
-            <Button 
-              size="lg" 
-              className="bg-accent text-accent-foreground hover:bg-accent/90 font-medium px-8"
-            >
-              Register as CA
-            </Button>
-          </div>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <Button 
+                size="lg" 
+                className="bg-accent text-accent-foreground hover:bg-accent/90 font-medium px-8"
+              >
+                Register as CA
+              </Button>
+            </motion.div>
+          </motion.div>
 
           {/* Visual */}
-          <div className="relative">
-            <div className="glass-card p-8 rounded-3xl">
+          <motion.div 
+            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.div 
+              className="glass-card p-8 rounded-3xl"
+              whileHover={{ 
+                rotateY: 5,
+                rotateX: -5,
+                scale: 1.02,
+              }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              style={{ transformStyle: "preserve-3d" }}
+            >
               {/* CA Profile Card Preview */}
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/60" />
+                  <motion.div 
+                    className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/60"
+                    animate={{ 
+                      boxShadow: [
+                        "0 0 0px hsl(38 92% 50% / 0)",
+                        "0 0 20px hsl(38 92% 50% / 0.4)",
+                        "0 0 0px hsl(38 92% 50% / 0)",
+                      ]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
                   <div>
-                    <div className="h-5 bg-muted/50 rounded w-32 mb-2" />
+                    <motion.div 
+                      className="h-5 bg-muted/50 rounded w-32 mb-2"
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    />
                     <div className="h-4 bg-muted/30 rounded w-24" />
                   </div>
-                  <div className="ml-auto flex items-center gap-1">
+                  <motion.div 
+                    className="ml-auto flex items-center gap-1"
+                    whileHover={{ scale: 1.2 }}
+                  >
                     <Star className="w-4 h-4 text-accent fill-accent" />
                     <span className="text-foreground font-semibold">4.9</span>
-                  </div>
+                  </motion.div>
                 </div>
                 
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="glass-card p-4 text-center">
-                    <div className="text-2xl font-bold gradient-text">250+</div>
-                    <div className="text-xs text-muted-foreground">Returns Filed</div>
-                  </div>
-                  <div className="glass-card p-4 text-center">
-                    <div className="text-2xl font-bold gradient-text-accent">98%</div>
-                    <div className="text-xs text-muted-foreground">Success Rate</div>
-                  </div>
-                  <div className="glass-card p-4 text-center">
-                    <div className="text-2xl font-bold gradient-text">12</div>
-                    <div className="text-xs text-muted-foreground">Years Exp</div>
-                  </div>
+                  {[
+                    { value: "250+", label: "Returns Filed", gradient: "gradient-text" },
+                    { value: "98%", label: "Success Rate", gradient: "gradient-text-accent" },
+                    { value: "12", label: "Years Exp", gradient: "gradient-text" },
+                  ].map((stat, index) => (
+                    <motion.div 
+                      key={stat.label}
+                      className="glass-card p-4 text-center"
+                      whileHover={{ scale: 1.05, y: -5 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                    >
+                      <div className={`text-2xl font-bold ${stat.gradient}`}>{stat.value}</div>
+                      <div className="text-xs text-muted-foreground">{stat.label}</div>
+                    </motion.div>
+                  ))}
                 </div>
 
                 <div className="space-y-3">
-                  <div className="h-4 bg-muted/30 rounded w-full" />
-                  <div className="h-4 bg-muted/30 rounded w-4/5" />
-                  <div className="h-4 bg-muted/30 rounded w-3/5" />
+                  {[100, 80, 60].map((width, i) => (
+                    <motion.div 
+                      key={i}
+                      className="h-4 bg-muted/30 rounded"
+                      style={{ width: `${width}%` }}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${width}%` }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 + i * 0.1, duration: 0.8 }}
+                    />
+                  ))}
                 </div>
 
-                <div className="flex gap-2">
-                  <span className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full">ITR</span>
-                  <span className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full">GST</span>
-                  <span className="px-3 py-1 bg-accent/20 text-accent text-xs rounded-full">Audit</span>
-                  <span className="px-3 py-1 bg-muted/50 text-muted-foreground text-xs rounded-full">+3</span>
-                </div>
+                <motion.div 
+                  className="flex gap-2 flex-wrap"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.8 }}
+                >
+                  {[
+                    { label: "ITR", bg: "bg-primary/20", text: "text-primary" },
+                    { label: "GST", bg: "bg-primary/20", text: "text-primary" },
+                    { label: "Audit", bg: "bg-accent/20", text: "text-accent" },
+                    { label: "+3", bg: "bg-muted/50", text: "text-muted-foreground" },
+                  ].map((tag, i) => (
+                    <motion.span 
+                      key={tag.label}
+                      className={`px-3 py-1 ${tag.bg} ${tag.text} text-xs rounded-full`}
+                      whileHover={{ scale: 1.1 }}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.9 + i * 0.1, type: "spring" }}
+                    >
+                      {tag.label}
+                    </motion.span>
+                  ))}
+                </motion.div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+            
+            {/* Floating decorative elements */}
+            <motion.div
+              className="absolute -top-4 -right-4 w-20 h-20 bg-accent/20 rounded-2xl blur-sm"
+              animate={{ rotate: [0, 10, 0], y: [0, -10, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute -bottom-4 -left-4 w-16 h-16 bg-primary/20 rounded-full blur-sm"
+              animate={{ rotate: [0, -10, 0], y: [0, 10, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </motion.div>
         </div>
       </div>
     </section>
