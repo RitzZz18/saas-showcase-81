@@ -10,20 +10,12 @@ import {
   Receipt,
   Brain,
   Smartphone,
-  HeartPulse,
-  LucideIcon
+  HeartPulse
 } from "lucide-react";
 import AnimatedCard from "./AnimatedCard";
 import { motion } from "framer-motion";
 
-interface Feature {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  color: string;
-}
-
-const features: Feature[] = [
+const features = [
   {
     icon: Users,
     title: "CA Marketplace",

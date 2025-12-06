@@ -1,17 +1,8 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
 
-interface Particle {
-  id: number;
-  x: number;
-  y: number;
-  size: number;
-  duration: number;
-  delay: number;
-}
-
 const ParticleField = () => {
-  const particles = useMemo<Particle[]>(() => {
+  const particles = useMemo(() => {
     return Array.from({ length: 50 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,

@@ -11,7 +11,7 @@ const FloatingShapes = () => {
   const smoothY = useSpring(mouseY, { damping: 50, stiffness: 100 });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
       
@@ -141,7 +141,7 @@ const FloatingShapes = () => {
   );
 };
 
-const Cube = ({ size }: { size: number }) => {
+const Cube = ({ size }) => {
   const half = size / 2;
   const faces = [
     { transform: `translateZ(${half}px)`, bg: "from-primary/30 to-primary/10" },
@@ -165,7 +165,7 @@ const Cube = ({ size }: { size: number }) => {
   );
 };
 
-const Sphere = ({ size }: { size: number }) => (
+const Sphere = ({ size }) => (
   <div
     className="rounded-full bg-gradient-to-br from-accent/40 via-accent/20 to-transparent backdrop-blur-sm border border-accent/30"
     style={{
@@ -180,7 +180,7 @@ const Sphere = ({ size }: { size: number }) => (
   />
 );
 
-const Pyramid = ({ size }: { size: number }) => (
+const Pyramid = ({ size }) => (
   <div className="relative" style={{ width: size, height: size }}>
     <div
       className="absolute inset-0"
@@ -200,7 +200,7 @@ const Pyramid = ({ size }: { size: number }) => (
   </div>
 );
 
-const Ring = ({ size }: { size: number }) => (
+const Ring = ({ size }) => (
   <div
     className="rounded-full border-4 border-primary/40"
     style={{
@@ -214,7 +214,7 @@ const Ring = ({ size }: { size: number }) => (
   />
 );
 
-const Diamond = ({ size }: { size: number }) => (
+const Diamond = ({ size }) => (
   <div
     className="bg-gradient-to-br from-accent/50 via-accent/20 to-transparent backdrop-blur-sm border border-accent/40"
     style={{
