@@ -8,9 +8,9 @@ const stats = [
   { value: 4.9, suffix: "/5", label: "User Rating", color: "accent" },
 ];
 
-const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) => {
+const AnimatedCounter = ({ value, suffix }) => {
   const [displayValue, setDisplayValue] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
+  const ref = useRef(null);
   const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
     return () => observer.disconnect();
   }, [value, hasAnimated]);
 
-  const formatNumber = (num: number) => {
+  const formatNumber = (num) => {
     if (num >= 1000000) return (num / 1000000).toFixed(1) + "M";
     if (num >= 1000) return (num / 1000).toFixed(0) + "K";
     return num.toString();

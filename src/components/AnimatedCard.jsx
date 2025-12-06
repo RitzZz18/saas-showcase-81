@@ -1,13 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ReactNode } from "react";
 
-interface AnimatedCardProps {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-}
-
-const AnimatedCard = ({ children, className = "", delay = 0 }: AnimatedCardProps) => {
+const AnimatedCard = ({ children, className = "", delay = 0 }) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -17,7 +10,7 @@ const AnimatedCard = ({ children, className = "", delay = 0 }: AnimatedCardProps
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -61,7 +54,7 @@ const AnimatedCard = ({ children, className = "", delay = 0 }: AnimatedCardProps
           background: useTransform(
             [mouseXSpring, mouseYSpring],
             ([x, y]) =>
-              `radial-gradient(circle at ${50 + (x as number) * 100}% ${50 + (y as number) * 100}%, hsl(174 72% 56% / 0.15) 0%, transparent 50%)`
+              `radial-gradient(circle at ${50 + x * 100}% ${50 + y * 100}%, hsl(174 72% 56% / 0.15) 0%, transparent 50%)`
           ),
         }}
       />
