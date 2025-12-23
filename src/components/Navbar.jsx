@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MessageSquare } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
@@ -11,6 +12,10 @@ const Navbar = () => {
     { name: "For CAs", href: "#for-cas" },
     { name: "Pricing", href: "#pricing" },
   ];
+
+  const handleNavClick = () => {
+    setIsOpen(false);
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/50">
@@ -41,6 +46,12 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
+            <Link to="/chat">
+              <Button variant="ghost" className="text-muted-foreground hover:text-foreground gap-2">
+                <MessageSquare className="w-4 h-4" />
+                AI Chat
+              </Button>
+            </Link>
             <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
               Login
             </Button>
@@ -73,6 +84,12 @@ const Navbar = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-2 pt-4">
+                <Link to="/chat" onClick={handleNavClick}>
+                  <Button variant="ghost" className="justify-start w-full gap-2">
+                    <MessageSquare className="w-4 h-4" />
+                    AI Chat
+                  </Button>
+                </Link>
                 <Button variant="ghost" className="justify-start">
                   Login
                 </Button>
