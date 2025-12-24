@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Send, MessageCircle } from "lucide-react";
 
-function App() {
+const ChatPage = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -63,7 +63,7 @@ function App() {
   return (
     <div className="min-h-screen bg-secondary/30 flex flex-col">
       {/* Header */}
-      <header className="bg-card border-b border-border px-6 py-4 flex items-center gap-3 shadow-sm">
+      <header className="bg-card border-b border-border px-6 py-4 flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
           <MessageCircle className="w-5 h-5 text-primary-foreground" />
         </div>
@@ -74,14 +74,14 @@ function App() {
       </header>
 
       {/* Messages */}
-      <main className="flex-1 overflow-y-auto p-6 space-y-4 max-w-4xl mx-auto w-full">
+      <main className="flex-1 overflow-y-auto p-6 space-y-4">
         {messages.map((message) => (
           <div
             key={message.id}
             className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}
           >
             <div
-              className={`max-w-[80%] md:max-w-[70%] px-4 py-3 rounded-2xl shadow-sm ${
+              className={`max-w-[80%] md:max-w-[60%] px-4 py-3 rounded-2xl ${
                 message.isBot
                   ? "bg-card border border-border text-foreground rounded-tl-md"
                   : "bg-primary text-primary-foreground rounded-tr-md"
@@ -102,7 +102,7 @@ function App() {
       </main>
 
       {/* Input */}
-      <footer className="bg-card border-t border-border p-4 shadow-sm">
+      <footer className="bg-card border-t border-border p-4">
         <div className="max-w-4xl mx-auto flex gap-3">
           <input
             type="text"
@@ -124,6 +124,6 @@ function App() {
       </footer>
     </div>
   );
-}
+};
 
-export default App;
+export default ChatPage;
